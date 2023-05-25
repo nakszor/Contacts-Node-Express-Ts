@@ -1,5 +1,6 @@
 import User from "./user.entities";
+import Contact from "./contact.entities";
 
 export {
-    User
+    User, Contact
 }

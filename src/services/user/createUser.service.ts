@@ -1,17 +1,18 @@
-//import { IMovieReturn } from '../interfaces/movies.interfaces'
+import { IUser, IUserResponse } from '../../interfaces/user.interfaces'
 import { AppDataSource } from '../../data-source'
 import { User } from '../../entities'
 import { Repository } from 'typeorm'
+import { returnUserSchema } from '../../schemas/user.schemas'
 
-const createUserService = async (userData:any) => {
+const createUserService = async (userData: IUser): Promise<IUserResponse> => {
 
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
 
-    const user = userRepository.create(userData)
+    const user: User = userRepository.create(userData)
 
     await userRepository.save(user)
     
-    const newUser = user
+    const newUser = returnUserSchema.parse(user)
     
     return newUser
 

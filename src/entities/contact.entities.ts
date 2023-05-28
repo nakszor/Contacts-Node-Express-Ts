@@ -1,8 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne,JoinColumn ,Unique,Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, ManyToOne,JoinColumn ,Column, CreateDateColumn } from 'typeorm';
 import User from './user.entities';
-
 @Entity()
-@Unique(['email'])
+
 export class Contact {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -19,7 +18,7 @@ export class Contact {
   @CreateDateColumn({ nullable: false })
   createdAt: Date;
 
-  @ManyToOne(() => User, user => user.contatos)
+  @ManyToOne(() => User, user => user.contatos,  { nullable: false , onDelete: 'CASCADE'})
   @JoinColumn({ name: 'user_id' })
   user: User;
 }

@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import AppError from '../errors/appError'
 
-const verifyUserPermissionMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+const verifyUserPermissionMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
          
     if(req.user.id !== req.params.id){
             

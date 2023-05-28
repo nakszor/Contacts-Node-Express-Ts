@@ -4,25 +4,43 @@ import { User } from "../../entities"
 import { IUserResponse, IUserUpdate } from "../../interfaces/user.interfaces"
 import { returnUserSchema } from "../../schemas/user.schemas"
 
-const updateUserService = async (newUserData: IUserUpdate, idUser: string): Promise<IUserResponse> => {
+const updateUserService = async (newUserData: IUserUpdate, userId: string): Promise<any> => {
 
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
 
-    const oldUserData = await userRepository.findOneBy({
-        id: idUser
+    const query = userRepository.createQueryBuilder()
+    .update(User)
+
+    if (newUserData.name) {
+     query.set({ name: newUserData.name })
+    }
+
+    if (newUserData.email) {
+        query.set({ email: newUserData.email })
+    }
+
+    if (newUserData.password) {
+        query.set({ password: newUserData.password })
+    }
+
+    if (newUserData.phoneNumber) {
+        query.set({ phoneNumber: newUserData.phoneNumber })
+    }
+
+    query.where("id = :userId", { userId })
+
+    await query.execute()
+    
+    const updatedUser = await userRepository.findOneBy({
+        id: userId
     })
 
-    const user = userRepository.create({
-        ...oldUserData,
-        ...newUserData
-    })
+    if (!updatedUser) {
+        throw new Error('Failed to update user')
+    }
 
-    await userRepository.save(user)
-
-    const updatedUser = returnUserSchema.parse(user)
-
+    //const returnUpdatedUser = returnUserSchema.parse(updatedUser)
+    
     return updatedUser
-
 }
-
 export default updateUserService

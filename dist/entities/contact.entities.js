@@ -38,7 +38,7 @@ __decorate([
     __metadata("design:type", Date)
 ], Contact.prototype, "createdAt", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => user_entities_1.default, user => user.contatos, { nullable: false, onDelete: 'CASCADE' }),
+    (0, typeorm_1.ManyToOne)(() => user_entities_1.default, user => user.contatos, { onDelete: 'CASCADE' }),
     (0, typeorm_1.JoinColumn)({ name: 'user_id' }),
     __metadata("design:type", user_entities_1.default)
 ], Contact.prototype, "user", void 0);

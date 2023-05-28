@@ -19,7 +19,7 @@
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --cls --rs src/server.ts",
     "build": "tsc",
-    "start":"node dist/server.js",
+    "start": "node dist/server.js",
     "typeorm": "typeorm-ts-node-commonjs"
   },
   "devDependencies": {

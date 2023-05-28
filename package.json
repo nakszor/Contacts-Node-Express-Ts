@@ -19,6 +19,7 @@
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --cls --rs src/server.ts",
     "build": "tsc",
+    "vercel-build":"echo hello",
     "start": "node dist/server.js",
     "typeorm": "typeorm-ts-node-commonjs"
   },

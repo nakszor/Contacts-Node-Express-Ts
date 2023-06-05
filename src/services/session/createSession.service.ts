@@ -3,11 +3,14 @@ import jwt from 'jsonwebtoken'
 import { AppDataSource } from '../../data-source'
 import { User } from '../../entities'
 import  AppError  from '../../errors/appError'
-import { IUserLogin } from '../../interfaces/user.interfaces'
+import { IUserLogin, IUserLoginReturn } from '../../interfaces/user.interfaces'
 import 'dotenv/config'
 import { Repository } from 'typeorm'
+import { createUnzip } from 'zlib'
+import { createUserSchema } from '../../schemas/user.schemas'
+import { returnUserSchema } from '../../schemas/user.schemas'
 
-const createSessionService = async (loginData: IUserLogin): Promise<string> => {
+const createSessionService = async (loginData: IUserLogin): Promise<any> => {
 
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
 
@@ -35,8 +38,14 @@ const createSessionService = async (loginData: IUserLogin): Promise<string> => {
             subject: String(user.id)
         }
     )
+    const returnUser = returnUserSchema.parse(user) 
 
-    return token
+    const response = {
+        user: {...returnUser},
+        token: token,
+        
+    }
+    return response
 }
 
 export default createSessionService

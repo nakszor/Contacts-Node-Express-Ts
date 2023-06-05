@@ -6,9 +6,7 @@ export const createSessionController = async (req: Request, res:Response) =>{
    
     const loginData: IUserLogin = req.body
 
-    const token = await createSessionService(loginData)
+    const response = await createSessionService(loginData)
 
-    return res.json({
-        token: token
-    })
+    return res.status(200).json(response)
 }

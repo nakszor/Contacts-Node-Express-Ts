@@ -13,10 +13,14 @@ const createUserSchema = z.object({
         message: 'phoneNumber deve conter apenas números'
       })
 });
-
 const userLoginSchema = z.object({
-    email: z.string().max(150).email(),
-    password: z.string().max(150)
+  email: z.string().max(150).email(),
+  password: z.string().max(150)
+})
+const userLoginReturnSchema = z.object({
+  user: userLoginSchema,
+  token: z.string()
+   
 }) 
   
 const userUpdateSchema = z.object({
@@ -55,5 +59,6 @@ export {
     createUserSchema,
     returnUserSchema,
     userUpdateSchema,
-    userLoginSchema
+    userLoginSchema,
+    userLoginReturnSchema
 }

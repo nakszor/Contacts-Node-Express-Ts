@@ -2,8 +2,6 @@ import 'express-async-errors'
 import express from 'express'
 import router from './routes'
 import cors from 'cors'
-import { Request, Response, NextFunction } from 'express'
-
 
 import handdleError from './errors/handleError'
 

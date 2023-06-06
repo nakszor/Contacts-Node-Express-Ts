@@ -6,7 +6,6 @@ import  AppError  from '../../errors/appError'
 import { IUserLogin, IUserLoginReturn } from '../../interfaces/user.interfaces'
 import 'dotenv/config'
 import { Repository } from 'typeorm'
-import { createUnzip } from 'zlib'
 import { createUserSchema } from '../../schemas/user.schemas'
 import { returnUserSchema } from '../../schemas/user.schemas'
 

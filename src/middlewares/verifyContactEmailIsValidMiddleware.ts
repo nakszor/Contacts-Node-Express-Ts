@@ -22,10 +22,15 @@ const verifyContactEmailIsValid = async (req: Request, res: Response, next: Next
             .andWhere('contact.email = :email', { email })
             .getOne();
         
-        if (emailAlreadyExists!.id !== contactId) {
+
+        if(emailAlreadyExists){
+            if (emailAlreadyExists!.id !== contactId) {
            
-            throw new AppError("A contact with this email already exists.",409)
+                throw new AppError("A contact with this email already exists.",409)
+            }
+            return next()
         }
+        
 
         return next()
 

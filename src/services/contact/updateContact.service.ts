@@ -9,6 +9,7 @@ const updateContactService = async (newContactData: IContactUpdate, contactId: s
 
     const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact)
 
+    console.log(contactId)
     const existingContact = await contactRepository.findOneBy({
         id: contactId
     })

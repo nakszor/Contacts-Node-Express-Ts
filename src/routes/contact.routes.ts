@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { validateSchemaMiddleware } from '../middlewares';
-import { createContactSchema } from '../schemas/contact.schemas';
+import { createContactSchema, updateContactSchema } from '../schemas/contact.schemas';
 import {
   verifyTokenIsValidMiddleware,
   verifyContactIsNotDuplicatedMiddleware,
@@ -100,7 +100,7 @@ contactRouter.get('/:id', verifyTokenIsValidMiddleware, verifyUserExists, verify
  *       404:
  *         description: Contato não encontrado
  */
-contactRouter.patch('/:id', verifyTokenIsValidMiddleware, verifyUserExists, verifyContactExists, verifyAuthorizationMiddleware, verifyContactPhoneNumberIsValid, verifyContactEmailIsValid, updateContactController);
+contactRouter.patch('/:id', validateSchemaMiddleware(updateContactSchema),verifyTokenIsValidMiddleware, verifyUserExists, verifyContactExists, verifyAuthorizationMiddleware, verifyContactPhoneNumberIsValid, verifyContactEmailIsValid, updateContactController);
 
 /**
  * @swagger

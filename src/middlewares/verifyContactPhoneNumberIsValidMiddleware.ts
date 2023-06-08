@@ -22,10 +22,14 @@ const verifyContactPhoneNumberIsValid = async (req: Request, res: Response, next
             .andWhere('contact.phoneNumber = :phoneNumber', { phoneNumber })
             .getOne();
         
-        if (phoneNumberAlreadyExists!.id !== contactId) {
-           
-            throw new AppError("A contact with this phone number already exists.",409)
-        }
+            if(phoneNumberAlreadyExists){
+                if (phoneNumberAlreadyExists!.id !== contactId) {
+               
+                    throw new AppError("A contact with this phone number already exists.",409)
+                }
+                return next()
+            }
+            
 
         return next()
 

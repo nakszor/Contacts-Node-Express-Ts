@@ -4,7 +4,7 @@ import { User } from "../../entities"
 import { IUserResponse, IUserUpdate } from "../../interfaces/user.interfaces"
 import { returnUserSchema } from "../../schemas/user.schemas"
 
-const updateUserService = async (newUserData: IUserUpdate, userId: string): Promise<any> => {
+const updateUserService = async (newUserData: IUserUpdate, userId: string): Promise<IUserResponse> => {
 
     const userRepository: Repository<User> = AppDataSource.getRepository(User)
 
@@ -39,8 +39,8 @@ const updateUserService = async (newUserData: IUserUpdate, userId: string): Prom
         throw new Error('Failed to update user')
     }
 
-    //const returnUpdatedUser = returnUserSchema.parse(updatedUser)
+    const returnUpdatedUser = returnUserSchema.parse(updatedUser)
     
-    return updatedUser
+    return returnUpdatedUser
 }
 export default updateUserService

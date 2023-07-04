@@ -1,4 +1,4 @@
-# como rodar o projeto
+# Como rodar o projeto
 
 clone o repositório
 
